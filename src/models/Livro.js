@@ -1,0 +1,15 @@
+import mongoose, { mongo } from "mongoose";
+
+//Schema é um objeto de configuracao que define a estrutura e as propriedades de um documento
+const livroSchema = new mongoose.Schema({
+    id: {type: mongoose.Schema.Types.ObjectId },
+    titulo: {type: String , required: true},
+    editora: {type: String},
+    preco: {type: Number},
+    paginas: {type: Number}
+}, { versionKey: false});
+
+//modelo é um objeto que representa uma colecao na base de dados
+const livro = mongoose.model("livros", livroSchema);
+
+export default livro;

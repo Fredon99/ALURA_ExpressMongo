@@ -1,18 +1,18 @@
 import express from "express";
+import dbConnect from "./config/dbConnect.js";
+import livro from "./models/Livro.js";
+
+const conexao = await dbConnect();
+
+conexao.on("error", (error) => {
+    console.error("Erro de conexao", error)
+})
+
+conexao.once("open", () => {
+    console.log("Conexao com o banco feita com sucesso.")
+})
 
 const app = express();
-
-const livros = [{
-    id: 1,
-    title: "Ice Age 2"
-},{
-    id: 2,
-    title: "O Hobbit"
-}]
-
-function buscaLivro(id) {
-    return livros.findIndex((livro) => livro.id === Number(id))
-}
 
 //setando o header de maneira global
 app.use((req,res,next) => {
@@ -28,8 +28,9 @@ app.get("/", (req,res) => {
     res.status(200).send("Curso de Node.js");
 });
 
-app.get("/livros", (req, res) => {
-    res.status(200).json(livros);
+app.get("/livros", async (req, res) => {
+    const listaLivros = await livro.find({});
+    res.status(200).json(listaLivros);
 })
 
 app.post("/livros" , (req,res) => {
@@ -56,3 +57,4 @@ app.delete("/livros/:id", (req,res) => {
 })
 
 export default app;
+
