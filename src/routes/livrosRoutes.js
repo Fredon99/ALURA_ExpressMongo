@@ -1,16 +1,14 @@
-import express from 'express';
-import LivroController from '../controllers/livroController.js';
+import express from "express";
+import LivroController from "../controllers/livrosController.js";
 
+const router = express.Router();
 
-const routes = express.Router()
-//express busca as rotas na sequencia - sempre adicionar da maior complexidade para menor
-routes.get("/livros", LivroController.listarLivros);
-routes.get("/livros/busca", LivroController.listarLivrosPorEditora);
-routes.get("/livros/:id", LivroController.listarLivroPorId);
-routes.post("/livros", LivroController.cadastroLivro);
-routes.put("/livros/:id", LivroController.atualizarLivro);
-routes.delete("/livros/:id", LivroController.deletarLivro);
+router
+  .get("/livros", LivroController.listarLivros)
+  .get("/livros/busca", LivroController.listarLivroPorEditora)
+  .get("/livros/:id", LivroController.listarLivroPorId)
+  .post("/livros", LivroController.cadastrarLivro)
+  .put("/livros/:id", LivroController.atualizarLivro)
+  .delete("/livros/:id", LivroController.excluirLivro)
 
-
-
-export default routes;
+export default router;   

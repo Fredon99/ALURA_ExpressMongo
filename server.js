@@ -1,10 +1,9 @@
-
-//sempre faço a importação do dotenv na camada mais externa da aplicação
 import "dotenv/config"
-import app from "./src/app.js"
+import app from './src/app.js'
 
-const PORT = 8000;
+const port = process.env.PORT || 8000;
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT} ...`);
+
+app.listen(port, () => {
+  console.log(`Servidor escutando em http://localhost:${port}`)
 })
